@@ -34,5 +34,52 @@ public class Main {
             System.out.println(result.toString());
         }
 
+//d)   die gesamtpunkten des Hauser
+        double punktehaus1=0;
+        double punktehaus2=0;
+        double punktehaus3=0;
+        double punktehaus4=0;
+        for (Result result : punkteListe) {
+            if (result.getKonfrontationstyp() == Konfrontationstyp.Galaktisch) {
+                punktehaus1 += result.getGlobalerEinfluss();
+            }
+            if (result.getKonfrontationstyp() == Konfrontationstyp.Individuell) {
+                punktehaus2 += result.getGlobalerEinfluss();
+            }
+            if (result.getKonfrontationstyp() == Konfrontationstyp.Team) {
+                punktehaus3 += result.getGlobalerEinfluss();
+            }
+            if (result.getKonfrontationstyp() == Konfrontationstyp.Multiversal) {
+                punktehaus4 += result.getGlobalerEinfluss();
+            }
+        }
+        List<String> ergebnisListe = new ArrayList<>();
+        ergebnisListe.add("Galaktisch$" + punktehaus1);
+        ergebnisListe.add("Individuell$" + punktehaus2);
+        ergebnisListe.add("Team$" + punktehaus3);
+        ergebnisListe.add("Multiversal$" + punktehaus4);
+
+
+//        ergebnisListe.sort((a, b) -> {
+//            double puncteA = Double.parseDouble(a.split("$")[1]);
+//            double puncteB = Double.parseDouble(b.split("$")[1]);
+//            return Double.compare(puncteB, puncteA);
+//        });
+
+
+
+
+//scriu in fisier
+        String fileName = "D:\\Facultate\\Anul II\\SEM 1\\BleocaCristiana721Aufgabe1\\src\\bericht_konfrontationen.txt";
+
+        try (BufferedWriter writer = new BufferedWriter(new FileWriter(fileName))) {
+            for (String ergebnis : ergebnisListe) {
+                writer.write(ergebnis);
+                writer.newLine();
+            }
+
+        } catch (IOException e) {
+            System.out.println("A apărut o eroare la salvarea datelor: " + e.getMessage());
+        }
 }}
 
